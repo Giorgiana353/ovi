@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dragostea noastră în timp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-pink-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg text-center max-w-md w-full">
+      <h1 class="text-3xl font-bold text-pink-600 mb-4">
+        Câte zile mai sunt păna ne vedem, dragul meu?
+      </h1>
+      <p class="text-lg font-medium text-gray-700">Spune-mi data dragoste</p>
+      <input
+        id="inputDate"
+        type="date"
+        class="mt-4 p-2 w-full border-2 border-pink-300 rounded-md focus:outline-none focus:border-pink-500"
+      />
+      <div class="my-6">
+        <p id="daysRemaining" class="text-5xl font-bold text-pink-500">...</p>
+        <span id="daysMessage" class="text-gray-600 hidden"
+          >zile până la momentul nostru magic ❤️</span
+        >
+      </div>
+      <button
+        onclick="calculateDays()"
+        class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full"
+      >
+        Calculează
+      </button>
+    </div>
+
+    <script>
+      function calculateDays() {
+        const inputDate = document.getElementById("inputDate").value;
+        if (!inputDate) {
+          alert("Te rog să introduci o dată!");
+          return;
+        }
+        const targetDate = new Date(inputDate);
+        const today = new Date();
+        const timeDifference = targetDate - today;
+        const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+        const daysText = document.getElementById("daysRemaining");
+        const daysMessage = document.getElementById("daysMessage");
+
+        if (daysRemaining >= 0) {
+          daysText.textContent = daysRemaining;
+          daysMessage.textContent = "zile până la momentul nostru magic ❤️";
+          daysMessage.classList.remove("hidden");
+        } else {
+          daysText.textContent = "🤍";
+          daysMessage.textContent =
+            "Această dată a trecut deja, dar iubirea noastră continuă!";
+          daysMessage.classList.remove("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>
